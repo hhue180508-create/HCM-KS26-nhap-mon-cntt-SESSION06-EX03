@@ -1,0 +1,23 @@
+1. Sơ đồ luồng dữ liệu Pipeline
+Bước 1: ĐỌC FILE
+Get-Content access.log
+        stdout
+          |
+          v
+Bước 2: LỌC CHỮ
+Select-String "TIMEOUT"
+        stdout
+          |
+          v
+Bước 3: ĐẾM KẾT QUẢ
+Measure-Object -Line
+          |
+          v
+     Tổng số lỗi
+2. Câu lệnh PowerShell hoàn chỉnh
+Get-Content access.log | Select-String "TIMEOUT" | Measure-Object -Line
+Lưu ý: Lệnh trên hiển thị cả thông tin thống kê, không chỉ một con số.
+Để chỉ xuất ra một con số duy nhất, dùng:
+(Get-Content access.log | Select-String "TIMEOUT").Count
+Lệnh thứ hai đọc file, lọc các dòng chứa TIMEOUT rồi đếm số kết quả mà không cần tạo file trung gian.
+
